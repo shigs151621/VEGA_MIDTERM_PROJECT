@@ -45,6 +45,22 @@
                         </div>
 
                         <div>
+                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Duration</label>
+                            <input type="text" name="duration" value="{{ old('duration') }}" placeholder="Enter movie duration" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                            @error('duration')
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Director</label>
+                            <input type="text" name="director" value="{{ old('director') }}" placeholder="Enter movie director" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                            @error('director')
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
                             <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Description</label>
                             <textarea name="description" rows="1" placeholder="Enter description" class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">{{ old('description') }}</textarea>
                             @error('description')
@@ -72,6 +88,8 @@
                                     <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Genre</th>
                                     <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Release Year</th>
                                     <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Language</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Duration</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Director</th>
                                     <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Description</th>
                                     <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Actions</th>
                                 </tr>
@@ -87,10 +105,16 @@
                                             {{ $movie->genre ? $movie->genre->name : 'N/A' }}
                                         </td>
                                         <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
-                                            <span class="movie-duration-display">{{ $movie->release_year }}</span>
+                                            <span class="movie-year-display">{{ $movie->release_year }}</span>
                                         </td>
                                         <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
-                                            <span class="movie-director-display">{{ $movie->language }}</span>
+                                            <span class="movie-language-display">{{ $movie->language }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-duration-display">{{ $movie->duration }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-director-display">{{ $movie->director }}</span>
                                         </td>
                                         <td class="px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400">
                                             <span class="movie-description-display">{{ Str::limit($movie->description, 50) ?? 'N/A' }}</span>
@@ -102,6 +126,8 @@
                                                 '{{ $movie->genre_id }}',
                                                 '{{ $movie->release_year }}',
                                                 '{{ addslashes($movie->language) }}',
+                                                '{{ addslashes($movie->duration) }}',
+                                                '{{ addslashes($movie->director) }}',
                                                 '{{ addslashes($movie->description) }}',
                                             );" class="text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
                                                 Edit
@@ -163,17 +189,29 @@
                         </select>
                     </div>
                 
-                    <!-- Duration -->
+                    <!-- Release Year -->
                     <div>
                         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Release Year</label>
                         <input type="year" id="edit_release_year" name="release_year"
                                class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
                     </div>
                 
-                    <!-- Director -->
+                    <!-- Language -->
                     <div>
                         <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Language</label>
                         <input type="text" id="edit_language" name="language"
+                               class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                    </div>
+                    <!-- Duration -->
+                    <div>
+                        <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Duration</label>
+                        <input type="text" id="edit_duration" name="duration"
+                               class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                    </div>
+                    <!-- Director -->
+                    <div>
+                        <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Director</label>
+                        <input type="text" id="edit_director" name="director"
                                class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
                     </div>
                 
@@ -200,7 +238,7 @@
 
     <script>
 
-        function editMovie(id, name, genre_id, release_year, language, description) {
+        function editMovie(id, name, genre_id, release_year, language, duration, director, description) {
             document.getElementById('editMovieModal').classList.remove('hidden');
             document.getElementById('editMovieModal').classList.add('flex');
             document.getElementById('editMovieForm').action = `/movies/${id}`;
@@ -210,6 +248,8 @@
             document.getElementById('edit_genre_select').value = genre_id;
             document.getElementById('edit_release_year').value = release_year;
             document.getElementById('edit_language').value = language;
+            document.getElementById('edit_duration').value = duration;
+            document.getElementById('edit_director').value = director;
             document.getElementById('edit_description').value = description || '';
         }
         

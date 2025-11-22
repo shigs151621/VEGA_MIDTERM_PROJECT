@@ -14,6 +14,8 @@ class Movie extends Model
         'genre_id',
         'description',
         'release_year',
+        'duration',
+        'director',
         'language',
      ];
 

@@ -23,6 +23,8 @@ class MovieController extends Controller
             'genre_id' => 'required|exists:genres,id',
             'description' => 'nullable|string|max:1000',
             'release_year' => 'nullable|digits:4|integer',
+            'duration' => 'required|string|max:10',
+            'director' => 'nullable|string|max:255',
             'language' => 'nullable|string|max:100',
         ]);
 
@@ -34,9 +36,11 @@ class MovieController extends Controller
     {
         $validated = $request->validate([
             'title'=> 'required|string|max:255',
-            'genre_id' => 'required|exists:genres, id',
+            'genre_id' => 'required|exists:genres,id',
             'description' => 'nullable|string|max:1000',
             'release_year' => 'nullable|digits:4|integer',
+            'duration' => 'required|string|max:10',
+            'director' => 'nullable|string|max:255',
             'language' => 'nullable|string|max:100',
         ]);
 
