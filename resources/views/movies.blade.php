@@ -167,7 +167,7 @@
 
  <!-- Edit Modal -->
 <div id="editMovieModal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-[9999]">
-    <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-maroon-800 p-6">
+    <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-gray-900 p-6">
         <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Movie</h2>
         <form id="editMovieForm" method="POST">
             @csrf
