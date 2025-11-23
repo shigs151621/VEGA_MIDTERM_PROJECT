@@ -119,11 +119,11 @@
                                                 Edit
                                             </button>
                                             <span class="mx-1 text-red-700">|</span>
-                                            <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to move this movie to trash?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="delete-btn text-red-600 transition-colors hover:text-red-700">
-                                                    Delete
+                                           <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to move this movie to trash?')">
+                                             @csrf
+                                             @method('DELETE')
+                                             <button type="submit" class="text-red-600 transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                              Delete
                                                 </button>
                                             </form>
                                         </td>
@@ -143,50 +143,64 @@
         </div>
     </div>
 
-    <!-- Edit Modal stays same, adjust background gradient -->
-    <div id="editMovieModal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-[9999]">
-        <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-maroon-800 p-6">
-            <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Movie</h2>
-            <form id="editMovieForm" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="grid gap-4 md:grid-cols-2">
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Movie Name</label>
-                        <input type="text" id="edit_movie_name" name="title" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Genre</label>
-                        <select id="edit_genre_select" name="genre_id" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30"></select>
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Release Year</label>
-                        <input type="year" id="edit_release_year" name="release_year" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Language</label>
-                        <input type="text" id="edit_language" name="language" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Duration</label>
-                        <input type="text" id="edit_duration" name="duration" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Director</label>
-                        <input type="text" id="edit_director" name="director" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
-                        <textarea id="edit_description" name="description" rows="3" class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500/30"></textarea>
-                    </div>
+ <!-- Edit Modal -->
+<div id="editMovieModal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-[9999]">
+    <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-maroon-800 p-6">
+        <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Movie</h2>
+        <form id="editMovieForm" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Movie Name</label>
+                    <input type="text" id="edit_movie_name" name="title"
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
                 </div>
-                <div class="md:col-span-2 mt-6 flex justify-end gap-3">
-                    <button type="button" onclick="closeEditModal()" class="rounded-lg border border-red-600 px-4 py-2 text-sm font-medium text-red-300 hover:bg-maroon-700">Cancel</button>
-                    <button type="submit" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">Update Movie</button>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Genre</label>
+                    <select id="edit_genre_select" name="genre_id" required
+                        class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
+                        <option value="">Select a genre</option>
+                        @foreach($genres as $genre)
+                            <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </form>
-        </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Release Year</label>
+                    <input type="year" id="edit_release_year" name="release_year"
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Language</label>
+                    <input type="text" id="edit_language" name="language"
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Duration</label>
+                    <input type="text" id="edit_duration" name="duration"
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Director</label>
+                    <input type="text" id="edit_director" name="director"
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
+                    <textarea id="edit_description" name="description" rows="3"
+                              class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/30"></textarea>
+                </div>
+            </div>
+            <div class="md:col-span-2 mt-6 flex justify-end gap-3">
+                <button type="button" onclick="closeEditModal()" class="rounded-lg border border-red-600 px-4 py-2 text-sm font-medium text-red-300 hover:bg-maroon-700">Cancel</button>
+                <button type="submit" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">Update Movie</button>
+            </div>
+        </form>
     </div>
+</div>
+
+
 
     <script>
         function editMovie(id, name, genre_id, release_year, language, duration, director, description) {

@@ -94,40 +94,43 @@
         </div>
     </div>
 
-    <div id="editGenreModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
-        <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-maroon-800 p-6">
-            <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Genre</h2>
+<!-- Edit Genre Modal -->
+<div id="editGenreModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+    <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-gray-900 p-6">
+        <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Genre</h2>
 
-            <form id="editGenreForm" method="POST">
-                @csrf
-                @method('PUT')
+        <form id="editGenreForm" method="POST">
+            @csrf
+            @method('PUT')
 
-                <div class="grid gap-4 md:grid-cols-2">
-                    <div>
-                        <label class="mb-2 block text-sm font-medium text-red-300">Genre Name</label>
-                        <input type="text" id="edit_genre_name" name="name" required
-                               class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
-                        <textarea id="edit_description" name="description" rows="3"
-                                  class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"></textarea>
-                    </div>
+            <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-red-300">Genre Name</label>
+                    <input type="text" id="edit_genre_name" name="name" required
+                           class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">
                 </div>
 
-                <div class="mt-6 flex justify-end gap-3">
-                    <button type="button" onclick="closeEditModal()"
-                            class="rounded-lg border border-red-600 px-4 py-2 text-sm font-medium text-red-300 hover:bg-maroon-700">
-                        Cancel
-                    </button>
-                    <button type="submit" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
-                        Update Genre
-                    </button>
+                <div class="md:col-span-2">
+                    <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
+                    <textarea id="edit_description" name="description" rows="3"
+                              class="w-full rounded-lg border border-red-600 bg-gray-700 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"></textarea>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <div class="mt-6 flex justify-end gap-3">
+                <button type="button" onclick="closeEditModal()"
+                        class="rounded-lg border border-red-600 px-4 py-2 text-sm font-medium text-red-300 hover:bg-gray-800">
+                    Cancel
+                </button>
+                <button type="submit" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
+                    Update Genre
+                </button>
+            </div>
+        </form>
     </div>
+</div>
+
+
 
     <script>
         function editGenre(id, name, description) {
