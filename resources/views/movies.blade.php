@@ -1,6 +1,13 @@
 <x-layouts.app :title="__('Movie Lists')">
     <div class="space-y-6">
 
+        {{-- Success Message --}}
+        @if(session('success'))
+            <div class="rounded-lg bg-green-100 p-4 text-sm text-green-800 dark:bg-green-900/30 dark:text-green-200">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-red-800 bg-gradient-to-b from-maroon-900 via-maroon-800 to-maroon-950 dark:border-red-900">
             <div class="flex h-full flex-col p-6">
                 <!-- Add New Movie Form -->
@@ -19,7 +26,7 @@
                         </div>
 
                         <label class="mb-2 block text-sm font-medium text-red-300">Genre
-                            <select id="edit_genre_id" name="genre_id" required
+                            <select id="genre_id" name="genre_id" required
                                     class="w-full rounded-lg mt-2 border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">
                                 <option value="">Select a genre</option>
                                 @foreach($genres as $genre)
@@ -96,25 +103,40 @@
                             </thead>
                             <tbody class="divide-y divide-red-700">
                                 @forelse($movies as $movie)
-                                    <tr class="transition-colors hover:bg-maroon-700/50" id="movie-row-{{ $movie->id }}">
-                                        <td class="px-4 py-3 text-center text-sm text-red-300">{{ $loop->iteration }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $movie->title }}</td>
-                                        <td class="px-4 py-3 text-sm text-red-300">{{ $movie->genre ? $movie->genre->name : 'N/A' }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $movie->release_year }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $movie->language }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $movie->duration }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $movie->director }}</td>
+                                    <tr class="transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50" id="movie-row-{{ $movie->id }}">
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-name-display">{{ $movie->title }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">
+                                            {{ $movie->genre ? $movie->genre->name : 'N/A' }}
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-year-display">{{ $movie->release_year }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-language-display">{{ $movie->language }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-duration-display">{{ $movie->duration }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
+                                            <span class="movie-director-display">{{ $movie->director }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400">
+                                            <span class="movie-description-display">{{ Str::limit($movie->description, 50) ?? 'N/A' }}</span>
+                                        </td>
                                         <td class="px-4 py-3 text-center text-sm text-red-300">{{ Str::limit($movie->description, 50) ?? 'N/A' }}</td>
                                         <td class="px-4 py-3 text-center text-sm">
                                             <button onclick="editMovie(
-                                                {{ $movie->id }},
+                                                '{{ $movie->id }}',
                                                 '{{ addslashes($movie->title) }}',
                                                 '{{ $movie->genre_id }}',
                                                 '{{ $movie->release_year }}',
-                                                '{{ addslashes($movie->language) }}',
-                                                '{{ addslashes($movie->duration) }}',
-                                                '{{ addslashes($movie->director) }}',
-                                                '{{ addslashes($movie->description) }}'
+                                                '{{ $movie->language }}',
+                                                '{{ $movie->duration }}',
+                                                '{{ $movie->director }}',
+                                                '{{ addslashes($movie->description) }}',
                                             );" class="text-red-400 transition-colors hover:text-red-500">
                                                 Edit
                                             </button>
@@ -122,7 +144,7 @@
                                            <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to move this movie to trash?')">
                                              @csrf
                                              @method('DELETE')
-                                             <button type="submit" class="text-red-600 transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                             <button type="submit" class="delete-btn text-red-600 transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
                                               Delete
                                                 </button>
                                             </form>
@@ -207,6 +229,7 @@
             document.getElementById('editMovieModal').classList.remove('hidden');
             document.getElementById('editMovieModal').classList.add('flex');
             document.getElementById('editMovieForm').action = `/movies/${id}`;
+
             document.getElementById('edit_movie_name').value = name;
             document.getElementById('edit_genre_select').value = genre_id;
             document.getElementById('edit_release_year').value = release_year;

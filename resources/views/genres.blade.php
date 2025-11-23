@@ -62,8 +62,12 @@
                                 @forelse($genres as $genre)
                                     <tr class="transition-colors hover:bg-maroon-700/50" id="genre-row-{{ $genre->id }}">
                                         <td class="px-4 py-3 text-center text-sm text-red-300">{{ $loop->iteration }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $genre->name }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-red-300">{{ Str::limit($genre->description, 50) ?? 'N/A' }}</td>
+                                        <td class="px-4 py-3 text-center text-sm text-red-300">
+                                            <span class="genre-name-display">{{ $genre->name }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 text-center text-sm text-red-300">
+                                            <span class="genre-description-display">{{ Str::limit($genre->description, 50) ?? 'N/A' }}</span>
+                                        </td>
                                         <td class="px-4 py-3 text-center text-sm">
                                             <button onclick="editGenre({{ $genre->id }}, '{{ addslashes($genre->name) }}', '{{ addslashes($genre->description) }}')"
                                                     class="text-red-400 transition-colors hover:text-red-500">

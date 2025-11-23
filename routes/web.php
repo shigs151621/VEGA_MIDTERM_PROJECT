@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
     Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
-    Route::delete('/movies/{movie}', [MovieController::class, 'destrou'])->name('movies.destroy');
+    Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movies.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
