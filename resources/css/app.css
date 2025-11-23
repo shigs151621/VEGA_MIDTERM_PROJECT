@@ -61,6 +61,34 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+/* Force dropdown lists (select menus) to be dark */
+select,
+select option {
+    background-color: #5b1e24 !important; /* maroon-900 */
+    color: #f4d7d7 !important; /* pale red text */
+}
+
+/* Force autocomplete popup (browser suggestions) to be dark */
+input,
+textarea {
+    color-scheme: dark;
+}
+
+/* WebKit browsers (Chrome, Opera, Edge) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+    -webkit-text-fill-color: #f4d7d7 !important;
+    -webkit-box-shadow: 0 0 0px 1000px #2a090c inset !important;
+}
+
+/* If a <datalist> is used, force dark options */
+datalist option {
+    background-color: #2a090c !important;
+    color: #f4d7d7 !important;
+}
+
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */

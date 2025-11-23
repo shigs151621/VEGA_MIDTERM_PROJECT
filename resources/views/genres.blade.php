@@ -7,38 +7,38 @@
             </div>
         @endif
 
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
+        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-red-800 bg-gradient-to-b from-maroon-900 via-maroon-800 to-maroon-950">
             <div class="flex h-full flex-col p-6">
 
-                <div class="mb-6 rounded-lg border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-                    <h2 class="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Add New Genre</h2>
+                <div class="mb-6 rounded-lg border border-red-700 bg-maroon-800/70 p-6">
+                    <h2 class="mb-4 text-lg font-semibold text-red-200">Add New Genre</h2>
 
                     <form action="{{ route('genres.store') }}" method="POST" class="space-y-4">
                         @csrf
 
                         <div class="grid gap-4 md:grid-cols-3">
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Genre Name</label>
+                                <label class="mb-2 block text-sm font-medium text-red-300">Genre Name</label>
                                 <input type="text" name="name" value="{{ old('name') }}"
                                        placeholder="Enter genre name" required
-                                       class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                                       class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">
                                 @error('name')
-                                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div class="md:col-span-2">
-                                <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Description</label>
+                                <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
                                 <textarea name="description" rows="1" placeholder="Enter genre description"
-                                          class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">{{ old('description') }}</textarea>
+                                          class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">{{ old('description') }}</textarea>
                                 @error('description')
-                                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                                    <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="flex justify-end">
-                            <button type="submit" class="rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            <button type="submit" class="rounded-lg bg-red-700 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500/40">
                                 Add Genre
                             </button>
                         </div>
@@ -47,40 +47,33 @@
 
                 <!-- Genre List Table -->
                 <div class="flex-1 overflow-auto">
-                    <h2 class="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Genre List</h2>
+                    <h2 class="mb-4 text-lg font-semibold text-red-200">Genre List</h2>
                     <div class="overflow-x-auto">
                         <table class="w-full min-w-full">
                             <thead>
-                                <tr class="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900/50">
-                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">#</th>
-                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Genre Name</th>
-                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Description</th>
-                                    <th class="px-4 py-3 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-300">Actions</th>
+                                <tr class="border-b border-red-700 bg-maroon-800/70">
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-red-200">#</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-red-200">Genre Name</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-red-200">Description</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-red-200">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
+                            <tbody class="divide-y divide-red-700">
                                 @forelse($genres as $genre)
-                                    <tr class="transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50" id="genre-row-{{ $genre->id }}">
-                                        <td class="px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400">{{ $loop->iteration }}</td>
-                                        <td class="px-4 py-3 text-center text-sm text-neutral-900 dark:text-neutral-100">
-                                            <span class="genre-name-display">{{ $genre->name }}</span>
-                                        </td>
-                                        <td class="px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400">
-                                            <span class="genre-description-display">{{ Str::limit($genre->description, 50) ?? 'N/A' }}</span>
-                                        </td>
+                                    <tr class="transition-colors hover:bg-maroon-700/50" id="genre-row-{{ $genre->id }}">
+                                        <td class="px-4 py-3 text-center text-sm text-red-300">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-3 text-center text-sm text-red-100">{{ $genre->name }}</td>
+                                        <td class="px-4 py-3 text-center text-sm text-red-300">{{ Str::limit($genre->description, 50) ?? 'N/A' }}</td>
                                         <td class="px-4 py-3 text-center text-sm">
-                                            <button onclick="editGenre(
-                                                            {{ $genre->id }}, 
-                                                            '{{ addslashes($genre->name) }}', 
-                                                            '{{ addslashes($genre->description) }}')"
-                                                    class="text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                                            <button onclick="editGenre({{ $genre->id }}, '{{ addslashes($genre->name) }}', '{{ addslashes($genre->description) }}')"
+                                                    class="text-red-400 transition-colors hover:text-red-500">
                                                 Edit
                                             </button>
-                                            <span class="mx-1 text-neutral-400">|</span>
+                                            <span class="mx-1 text-red-700">|</span>
                                             <form action="{{ route('genres.destroy', $genre->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to move this genre to trash?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="delete-btn text-red-600 transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                                <button type="submit" class="delete-btn text-red-600 transition-colors hover:text-red-700">
                                                     Delete
                                                 </button>
                                             </form>
@@ -88,7 +81,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-4 py-8 text-center text-sm text-neutral-500 dark:text-neutral-400">
+                                        <td colspan="5" class="px-4 py-8 text-center text-sm text-red-300">
                                             No genres found. Add your first genre above!
                                         </td>
                                     </tr>
@@ -102,8 +95,8 @@
     </div>
 
     <div id="editGenreModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
-        <div class="w-full max-w-2xl rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-800">
-            <h2 class="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Edit Genre</h2>
+        <div class="w-full max-w-2xl rounded-xl border border-red-700 bg-maroon-800 p-6">
+            <h2 class="mb-4 text-lg font-semibold text-red-200">Edit Genre</h2>
 
             <form id="editGenreForm" method="POST">
                 @csrf
@@ -111,26 +104,24 @@
 
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
-                        <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Genre Name</label>
+                        <label class="mb-2 block text-sm font-medium text-red-300">Genre Name</label>
                         <input type="text" id="edit_genre_name" name="name" required
-                               class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
+                               class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30">
                     </div>
 
-
                     <div class="md:col-span-2">
-                        <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Description</label>
+                        <label class="mb-2 block text-sm font-medium text-red-300">Description</label>
                         <textarea id="edit_description" name="description" rows="3"
-                                  class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"></textarea>
+                                  class="w-full rounded-lg border border-red-600 bg-maroon-900 px-4 py-2 text-sm text-red-50 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"></textarea>
                     </div>
                 </div>
 
                 <div class="mt-6 flex justify-end gap-3">
                     <button type="button" onclick="closeEditModal()"
-                            class="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-600 dark:text-neutral-300 dark:hover:bg-neutral-700">
+                            class="rounded-lg border border-red-600 px-4 py-2 text-sm font-medium text-red-300 hover:bg-maroon-700">
                         Cancel
                     </button>
-                    <button type="submit"
-                            class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+                    <button type="submit" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
                         Update Genre
                     </button>
                 </div>
@@ -139,7 +130,7 @@
     </div>
 
     <script>
-        function editGenre (id, name, description) {
+        function editGenre(id, name, description) {
             document.getElementById('editGenreModal').classList.remove('hidden');
             document.getElementById('editGenreModal').classList.add('flex');
             document.getElementById('editGenreForm').action = `/genres/${id}`;
@@ -151,7 +142,6 @@
         function closeEditModal() {
             document.getElementById('editGenreModal').classList.add('hidden');
             document.getElementById('editGenreModal').classList.remove('flex');
-
             document.getElementById('editGenreForm').reset();
         }
     </script>

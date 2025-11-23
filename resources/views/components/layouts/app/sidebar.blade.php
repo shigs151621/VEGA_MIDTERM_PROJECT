@@ -13,9 +13,9 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="home" :href="route('movies.index')" :current="request()->routeIs('movies.index')" wire:navigate>{{ __('Movies') }}</flux:navlist.item>
-                    <flux:navlist.item icon="home" :href="route('genres.index')" :current="request()->routeIs('genres.index')" wire:navigate>{{ __('Genres') }}</flux:navlist.item>
+                    <flux:navlist.item icon="bolt" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="camera" :href="route('movies.index')" :current="request()->routeIs('movies.index')" wire:navigate>{{ __('Movies') }}</flux:navlist.item>
+                    <flux:navlist.item icon="video-camera" :href="route('genres.index')" :current="request()->routeIs('genres.index')" wire:navigate>{{ __('Genres') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -45,7 +45,7 @@
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
                                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                                     <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
+                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-red-700 dark:text-white"
                                     >
                                         {{ auth()->user()->initials() }}
                                     </span>
@@ -95,7 +95,7 @@
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
                                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                                     <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
+                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-red-700 dark:text-white"
                                     >
                                         {{ auth()->user()->initials() }}
                                     </span>
