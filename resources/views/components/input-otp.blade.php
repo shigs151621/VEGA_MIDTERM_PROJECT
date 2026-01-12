@@ -1,3 +1,6 @@
+
+
+
 @props([
     'digits' => 6,
     'name' => 'code',
