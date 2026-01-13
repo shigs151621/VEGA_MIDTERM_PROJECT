@@ -16,6 +16,7 @@
                     <flux:navlist.item icon="bolt" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="camera" :href="route('movies.index')" :current="request()->routeIs('movies.index')" wire:navigate>{{ __('Movies') }}</flux:navlist.item>
                     <flux:navlist.item icon="video-camera" :href="route('genres.index')" :current="request()->routeIs('genres.index')" wire:navigate>{{ __('Genres') }}</flux:navlist.item>
+                    <flux:navlist.item icon="trash" :href="route('movies.trash')" :current="request()->routeIs('movies.trash')" wire:navigate>{{ __('Trash') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

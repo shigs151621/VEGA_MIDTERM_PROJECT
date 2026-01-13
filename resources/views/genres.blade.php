@@ -1,8 +1,9 @@
 <x-layouts.app :title="__('Genres')">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
 
+        {{-- Success Message --}}
         @if(session('success'))
-            <div class="rounded-lg bg-green-100 p-4 text-green-700 dark:bg-green-900/30 dark:text-green-300">
+            <div class="rounded-lg bg-green-100 p-4 text-sm text-green-800 dark:bg-green-900/30 dark:text-green-200" x-data="{ show:true }" x-show="show" x-init="setTimeout(() => show = false, 3000)">
                 {{ session('success') }}
             </div>
         @endif

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->year('release_year')->nullable();
             $table->string('language')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
